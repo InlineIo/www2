@@ -1,0 +1,30 @@
+
+<%- include('layout/header'); -%>
+<%- include('layout/navbar'); -%>
+<div data-controller="projects">
+  <div>
+    <h1>Projects</h1>
+  </div>
+  <section>
+    <form data-action="projects#save">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" data-target="projects.name"/>
+      </div>
+      <div>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </section>
+  <section>
+    <table>
+      <tr>
+        <th>Name</th>
+      </tr>
+      <tbody data-target="projects.list">
+        <%- include("projects/list-items", {projects: projects}); %>
+      </tbody>
+    </table>
+  </section>
+</div>
+<%- include('layout/footer'); -%>

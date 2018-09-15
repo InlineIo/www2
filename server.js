@@ -19,6 +19,10 @@ app.set('views', __dirname + '/views');
 app.use(express.static(publicPath))
 app.use(webpackMiddleware(webpack(webpackConfig)))
 
+app.get("/", (req, res) => {
+  res.render("home");
+});
+
 app.get("/projects-page", (req, res) => {
   res.render("projects", { projects: [{ name: "Betterez" }, { name: "Grupo senda" }] });
 });

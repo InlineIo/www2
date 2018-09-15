@@ -31,7 +31,6 @@ app.get("/projects-list", (req, res) => {
   res.render("projects/list-items", { projects: [{ name: "Betterez" }, { name: "Grupo senda" }, , { name: "Scottish" }] });
 });
 
-
 app.post("/projects", (req, res) => {
   console.log("POSTED TO projects");
   res.send({ status: "OK" });

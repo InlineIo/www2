@@ -1,30 +1,32 @@
-
 <%- include('layout/header'); -%>
-<%- include('layout/navbar'); -%>
-<div data-controller="projects">
-  <div>
-    <h1>Projects</h1>
-  </div>
-  <section>
-    <form data-action="projects#save">
-      <div>
-        <label for="name">Name</label>
-        <input type="text" data-target="projects.name"/>
+      <div data-controller="projects">
+  <%- include('components/title', {title: "Projects", sub: "This is where work happens"}) %>
+        <div class="mb-4 card">
+          <div class="card-body">
+            <h5 class="card-title">Add a new project</h5>
+            <form class="form-inline" data-action="projects#save">
+              <div class="form-group mb-2 mr-2">
+                <label for="newProjectName" class="mr-2">Project name</label>
+                <input type="text" placeholder="New project" class="form-control" id="newProjectName" data-target="projects.name">
+              </div>
+              <button type="submit" class="btn btn-primary mb-2">Create</button>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Projects list</h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody data-target="projects.list">
+                <%- include("projects/list-items", {projects: projects}); %>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div>
-        <button type="submit">Save</button>
-      </div>
-    </form>
-  </section>
-  <section>
-    <table>
-      <tr>
-        <th>Name</th>
-      </tr>
-      <tbody data-target="projects.list">
-        <%- include("projects/list-items", {projects: projects}); %>
-      </tbody>
-    </table>
-  </section>
-</div>
 <%- include('layout/footer'); -%>

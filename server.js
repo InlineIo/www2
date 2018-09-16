@@ -23,8 +23,24 @@ app.get("/", (req, res) => {
   res.render("signin");
 });
 
+app.get("/dashboard-page", (req, res) => {
+  res.render("dashboard");
+});
+
 app.get("/projects-page", (req, res) => {
   res.render("projects", { projects: [{ name: "Betterez" }, { name: "Grupo senda" }] });
+});
+
+app.get("/users-page", (req, res) => {
+  res.render("users");
+});
+
+app.get("/reports-page", (req, res) => {
+  res.render("reports");
+});
+
+app.get("/integrations-page", (req, res) => {
+  res.render("integrations");
 });
 
 app.get("/projects-list", (req, res) => {

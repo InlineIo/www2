@@ -25,6 +25,15 @@ export default class extends Controller {
       .catch(console.log);
   }
 
+  remove(event) {
+    event.preventDefault();
+    deleteData(`projects/${event.target.dataset.id}`)
+      .then((result) => {
+        this.refresh()
+      })
+      .catch(console.log);
+  }
+
   get name() {
     return this.nameTarget.value;
   }

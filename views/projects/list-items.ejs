@@ -1,5 +1,8 @@
 <% projects.forEach(function(project) { %>
 <tr>
   <td><%-project.name%></td>
+  <td>
+    <a href="<%-project.id%>" data-id="<%-project.id%>" data-action="projects#remove">delete</a>
+  </td>
 </tr>
 <% }); %>

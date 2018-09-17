@@ -1,6 +1,7 @@
 const path = require("path")
 const express = require("express")
 const cons = require("consolidate")
+const db = require("./models");
 const webpack = require("webpack")
 const webpackMiddleware = require("webpack-dev-middleware")
 const webpackConfig = require("./webpack.config")
@@ -18,6 +19,7 @@ app.set('views', __dirname + '/views');
 
 app.use(express.static(publicPath))
 app.use(webpackMiddleware(webpack(webpackConfig)))
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.render("signin");
@@ -28,7 +30,13 @@ app.get("/dashboard-page", (req, res) => {
 });
 
 app.get("/projects-page", (req, res) => {
-  res.render("projects", { projects: [{ name: "Betterez" }, { name: "Grupo senda" }] });
+  db.projects.findAll()
+    .then((projects) => {
+      res.render("projects", { projects});
+    })
+    .catch((error) => {
+      res.render("error", { error });
+    });
 });
 
 app.get("/users-page", (req, res) => {
@@ -44,12 +52,33 @@ app.get("/integrations-page", (req, res) => {
 });
 
 app.get("/projects-list", (req, res) => {
-  res.render("projects/list-items", { projects: [{ name: "Betterez" }, { name: "Grupo senda" }, , { name: "Scottish" }] });
+  db.projects.findAll()
+    .then((projects) => {
+      res.render("projects/list-items", { projects });
+    })
+    .catch((error) => {
+      res.render("error", { error });
+    });
 });
 
 app.post("/projects", (req, res) => {
-  console.log("POSTED TO projects");
-  res.send({ status: "OK" });
+  db.projects.create(req.body)
+    .then(() => {
+      res.send({ status: "OK" });
+    })
+    .catch((error) => {
+      res.render("error", { error });
+    });
+});
+
+app.delete("/projects/:id", (req, res) => {
+  db.projects.destroy({id: req.params.id})
+    .then(() => {
+      res.send({ status: "OK" });
+    })
+    .catch((error) => {
+      res.render("error", { error });
+    });
 });
 
 app.listen(port, () => {

@@ -7,7 +7,11 @@ program.version("1.0.0")
   .usage();
 
 program
-  .command("modules <name>")
-  .action(mod.cmd(output)(name, cmd));
+  .command("module <name>")
+  .action(mod.cmd(output));
 
 program.parse(process.argv);
+
+function output(txt) {
+  console.log(txt);
+}

@@ -12,7 +12,7 @@ module.exports = (app) => {
   });
 
   app.get("/content/projects", (req, res) => {
-    app.db.projects.findAll()
+    db.projects.findAll()
       .then((projects) => {
         res.render("projects/list-items", { projects });
       })

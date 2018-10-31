@@ -25,27 +25,8 @@ app.use(webpackMiddleware(webpack(webpackConfig)))
 app.use(express.json());
 
 web.set(app);
-
-app.post("/projects", (req, res) => {
-  db.projects.create(req.body)
-    .then(() => {
-      res.send({ status: "OK" });
-    })
-    .catch((error) => {
-      res.render("error", { error });
-    });
-});
-
-app.delete("/projects/:id", (req, res) => {
-  db.projects.destroy({id: req.params.id})
-    .then(() => {
-      res.send({ status: "OK" });
-    })
-    .catch((error) => {
-      res.render("error", { error });
-    });
-});
+api.set(app);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
-})
+});

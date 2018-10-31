@@ -1,12 +1,12 @@
 // src/controllers/hello_controller.js
 import { Controller } from "stimulus"
-import { getHtml, postData} from "../services/ajax";
+import { getHtml, postData, deleteData} from "../services/ajax";
 import { getDefaultEventNameForElement } from "@stimulus/core/dist/src/action";
 
 export default class extends Controller {
   static targets = ["name", "list"]
   refresh() {
-    getHtml("/projects-list")
+    getHtml("/content/projects")
       .then((html) => {
         this.listTarget.innerHTML = html;
       })
@@ -15,7 +15,7 @@ export default class extends Controller {
 
   save(event) {
     event.preventDefault();
-    postData("/projects", { name: this.name })
+    postData("/api/projects", { name: this.name })
       .then((result) => {
         if (result.status === "OK") {
           this.name = "";
@@ -27,7 +27,7 @@ export default class extends Controller {
 
   remove(event) {
     event.preventDefault();
-    deleteData(`projects/${event.target.dataset.id}`)
+    deleteData(`/api/projects/${event.target.dataset.id}`)
       .then((result) => {
         this.refresh()
       })

@@ -1,11 +1,12 @@
 <h1 class="h3 mb-3 font-weight-normal">Please sign up for a new account</h1>
 <p class="mt-5 mb-3 text-muted">If you already have an account <a href="/#/startSignIn" data-action="session#startSignIn">sign in here</a></p>
 <label for="inputEmail" class="sr-only">Email address</label>
-<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus autocomplete="email">
+<input data-target="session.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus autocomplete="email">
 <label for="inputPassword" class="sr-only">Password</label>
-<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+<input data-target="session.password"type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 <label for="inputConfirmPassword" class="sr-only">Confirm password</label>
-<input type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm password" required>
+<input data-target="session.confirmPassword"type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm password" required>
 <label for="organization" class="sr-only">Organization</label>
-<input type="text" id="organization" class="form-control" placeholder="Organization name" required>
+<input data-target="session.organization"type="text" id="organization" class="form-control" placeholder="Organization name" required>
+<p class="server-error" data-target="session.serverError"></p>
 <button class="btn btn-lg btn-primary btn-block" type="submit" data-action="session#signUp">Sign up</button>

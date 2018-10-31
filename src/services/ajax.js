@@ -13,13 +13,18 @@ function postData(url = ``, data = {}) {
     credentials: "same-origin", // include, same-origin, *omit
     headers: {
       "Content-Type": "application/json; charset=utf-8"
-      // "Content-Type": "application/x-www-form-urlencoded"
     },
     redirect: "follow", // manual, *follow, error
     referrer: "no-referrer", // no-referrer, *client
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   })
-  .then(response => response.json()); // parses response to JSON
+  .then((response) => {
+    if (response.status > 299) {
+      return response.json()
+        .then((json) => Promise.reject(json));
+    }
+    return response.json();
+    }); // parses response to JSON
 }
 
 function deleteData(url = ``, data = {}) {

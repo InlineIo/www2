@@ -3,7 +3,12 @@ import { getHtml, postData } from "../../../../src/services/ajax";
 import { getDefaultEventNameForElement } from "@stimulus/core/dist/src/action";
 
 export default class extends Controller {
-  static targets = ["name", "container"]
+  static targets = ["email",
+    "organization",
+    "password",
+    "confirmPassword",
+    "container",
+    "serverError"]
 
   navigate() {
     if (this.hash !== location.hash) {
@@ -42,5 +47,36 @@ export default class extends Controller {
         this.containerTarget.innerHTML = html;
       })
       .catch(console.log);
+  }
+
+  pwdNoMatchErr() {
+    this.serverErrorTarget.innerHTML = "The password and confirmation pwd don't match";
+  }
+
+  pwdMatch() {
+    return this.passwordTarget.value === this.confirmPasswordTarget.value
+  }
+
+  signUp(event) {
+    event.preventDefault();
+    if (!this.pwdMatch()) {
+      this.pwdNoMatchErr();
+      return;
+    }
+    postData("/api/signup", {
+      organization: this.organizationTarget.value,
+      email: this.emailTarget.value,
+      password: this.passwordTarget.value,
+      confirmPassword: this.confirmPasswordTarget.value
+    })
+    .then((result) => {
+      console.log("THEN", result);
+    })
+    .catch((err) => {
+      if (err.errorCode === "PWD_NO_MATCH") {
+        this.pwdNoMatchErr();
+      }
+      return "";
+    });
   }
 }

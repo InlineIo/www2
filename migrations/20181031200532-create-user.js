@@ -22,7 +22,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      seed: {
+      salt: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       orgId: {

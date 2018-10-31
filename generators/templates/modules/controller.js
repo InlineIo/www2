@@ -8,15 +8,26 @@ export default class extends Controller {
 
   // Used to navigate if the hash changes
   // the hash should has the same name of the event
-  connect() {
-    this.hash = location.hash;
-    window.onhashchange = () => {
-      if (this.hash !== location.hash) {
-        const fn = location.hash.replace("#/", "");
-        if (typeof this[fn] === "function") {
-          this[fn]();
-        }
+  // hash should be updated on methods that want to preserve state in the url
+  // calling this.updateHash()
+  navigate() {
+    if (this.hash !== location.hash) {
+      const fn = location.hash.replace("#/", "");
+      if (typeof this[fn] === "function") {
+        this[fn]();
       }
+    }
+  }
+
+  updateHash() {
+    this.hash = location.hash;
+  }
+
+  connect() {
+    this.hash = "";
+    this.navigate();
+    window.onhashchange = () => {
+      this.navigate();
     };
   }
 

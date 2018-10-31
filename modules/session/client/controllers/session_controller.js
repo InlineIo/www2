@@ -5,22 +5,31 @@ import { getDefaultEventNameForElement } from "@stimulus/core/dist/src/action";
 export default class extends Controller {
   static targets = ["name", "container"]
 
-  connect() {
-    this.hash = location.hash;
-    window.onhashchange = () => {
-      if (this.hash !== location.hash) {
-        const fn = location.hash.replace("#/", "");
-        if (typeof this[fn] === "function") {
-          this[fn]();
-        }
+  navigate() {
+    if (this.hash !== location.hash) {
+      const fn = location.hash.replace("#/", "");
+      if (typeof this[fn] === "function") {
+        this[fn]();
       }
+    }
+  }
+
+  updateHash() {
+    this.hash = location.hash;
+  }
+
+  connect() {
+    this.hash = "";
+    this.navigate();
+    window.onhashchange = () => {
+      this.navigate();
     };
   }
 
   startSignIn() {
     getHtml("/content/session/signin")
       .then((html) => {
-        this.hash = location.hash;
+        this.updateHash();
         this.containerTarget.innerHTML = html;
       })
       .catch(console.log)
@@ -29,7 +38,7 @@ export default class extends Controller {
   startSignUp() {
     getHtml("/content/session/signup")
       .then((html) => {
-        this.hash = location.hash;
+        this.updateHash();
         this.containerTarget.innerHTML = html;
       })
       .catch(console.log);

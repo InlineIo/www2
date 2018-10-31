@@ -5,7 +5,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "w": "nodemon server.js"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
@@ -27,5 +28,8 @@
     "stimulus": "^1.1.0",
     "webpack": "4.17.1",
     "webpack-dev-middleware": "^3.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.5"
   }
 }

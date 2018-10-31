@@ -5,6 +5,8 @@ const db = require("./models");
 const webpack = require("webpack")
 const webpackMiddleware = require("webpack-dev-middleware")
 const webpackConfig = require("./webpack.config")
+const web = require("./web");
+const api = require("./api");
 
 const app = express()
 const publicPath = path.join(__dirname, "public")
@@ -16,50 +18,13 @@ app.engine("ejs", cons.ejs);
 // set .html as the default extension
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
+app.set("db", db);
 
 app.use(express.static(publicPath))
 app.use(webpackMiddleware(webpack(webpackConfig)))
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.render("signin");
-});
-
-app.get("/dashboard-page", (req, res) => {
-  res.render("dashboard");
-});
-
-app.get("/projects-page", (req, res) => {
-  db.projects.findAll()
-    .then((projects) => {
-      res.render("projects", { projects});
-    })
-    .catch((error) => {
-      res.render("error", { error });
-    });
-});
-
-app.get("/users-page", (req, res) => {
-  res.render("users");
-});
-
-app.get("/reports-page", (req, res) => {
-  res.render("reports");
-});
-
-app.get("/integrations-page", (req, res) => {
-  res.render("integrations");
-});
-
-app.get("/projects-list", (req, res) => {
-  db.projects.findAll()
-    .then((projects) => {
-      res.render("projects/list-items", { projects });
-    })
-    .catch((error) => {
-      res.render("error", { error });
-    });
-});
+web.set(app);
 
 app.post("/projects", (req, res) => {
   db.projects.create(req.body)

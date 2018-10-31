@@ -23,6 +23,7 @@ app.use(express.static(publicPath))
 app.use(webpackMiddleware(webpack(webpackConfig)))
 app.use(express.json());
 
+require("./modules/session/server/routes").set(app);
 require("./modules/projects/server/routes").set(app);
 require("./modules/users/server/routes").set(app);
 web.set(app);

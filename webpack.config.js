@@ -1,9 +1,10 @@
-const path = require("path")
+const path = require("path");
 
 module.exports = {
   entry: {
-    bundle: "./src/index.js",
-    projects: "./modules/projects/client/index.js"
+    projects: "./modules/projects/client/index.js",
+    session: "./modules/session/client/index.js",
+    users: "./modules/users/client/index.js"
   },
 
   output: {

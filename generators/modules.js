@@ -32,6 +32,7 @@ module.exports = {
         clientIndex = `${clientDir}/index.js`,
         controller = `${controllersDir}/${name}_controller.js`;
       output("Creating files");
+
       output("Finished");
     };
   }

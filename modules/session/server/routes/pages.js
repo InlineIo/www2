@@ -1,10 +1,18 @@
-module.exports = (app, config) => {
+module.exports = (app) => {
   const db = app.get("db"),
     payload = {
-      jsApp: `../${config.moduleFolder}.js`
+      jsApp: "../session.js"
     };
 
   app.get("/", (req, res) => {
-    res.render(`../modules/${config.moduleFolder}/server/views/index.ejs`, payload);
+    res.render("../modules/session/server/views/index.ejs", payload);
+  });
+  
+  app.get("/content/session/signin", (req, res) => {
+    res.render("../modules/session/server/views/components/signin.ejs", payload);
+  });
+
+  app.get("/content/session/signup", (req, res) => {
+    res.render("../modules/session/server/views/components/signup.ejs", payload);
   });
 };

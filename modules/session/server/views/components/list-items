@@ -1,8 +1,0 @@
-<% usignin.forEach(function () { %>
-  <tr>
-    <td><%-.name%></td>
-    <td>
-      <a href="<%-.id%>" data-id="<%-.id%>" data-action="usignin#remove">delete</a>
-    </td>
-  </tr>
-  <% }); %>

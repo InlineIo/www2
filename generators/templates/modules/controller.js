@@ -5,6 +5,21 @@ import { getDefaultEventNameForElement } from "@stimulus/core/dist/src/action";
 
 export default class extends Controller {
   static targets = ["name", "list"]
+
+  // Used to navigate if the hash changes
+  // the hash should has the same name of the event
+  connect() {
+    this.hash = location.hash;
+    window.onhashchange = () => {
+      if (this.hash !== location.hash) {
+        const fn = location.hash.replace("#/", "");
+        if (typeof this[fn] === "function") {
+          this[fn]();
+        }
+      }
+    };
+  }
+
   refresh() {
     getHtml("/content/{{name}}")
       .then((html) => {

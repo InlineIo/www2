@@ -1,4 +1,4 @@
-module.exports = (app, config) => {
+module.exports = (app) => {
   const db = app.get("db");
   app.post("/api/signin", (req, res) => {
     db.usignin.create(req.body)

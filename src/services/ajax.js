@@ -4,6 +4,14 @@ function getHtml(url = ``) {
     .then(result => result.text());
 }
 
+function handleResponse(response) {
+  if (response.status > 299) {
+    return response.json()
+      .then((json) => Promise.reject(json));
+  }
+  return response.json();
+}
+
 function postData(url = ``, data = {}) {
   // Default options are marked with *
   return fetch(url, {
@@ -18,13 +26,7 @@ function postData(url = ``, data = {}) {
     referrer: "no-referrer", // no-referrer, *client
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   })
-  .then((response) => {
-    if (response.status > 299) {
-      return response.json()
-        .then((json) => Promise.reject(json));
-    }
-    return response.json();
-    }); // parses response to JSON
+  .then(handleResponse); // parses response to JSON
 }
 
 function deleteData(url = ``, data = {}) {
@@ -40,7 +42,7 @@ function deleteData(url = ``, data = {}) {
     referrer: "no-referrer", // no-referrer, *client
     body: JSON.stringify(data), // body data type must match "Content-Type" header
   })
-    .then(response => response.json()); // parses response to JSON
+  .then(handleResponse); // parses response to JSON
 }
 
 export { getHtml, postData, deleteData };

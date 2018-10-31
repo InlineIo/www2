@@ -11,7 +11,6 @@ module.exports = (app) => {
   });
 
   app.delete("/api/projects/:id", (req, res) => {
-    console.log("ID:", req.params.id);
     db.projects.destroy({
       where: {
         id: req.params.id

@@ -1,6 +1,6 @@
-<%- include('layout/header'); -%>
+<%- include('../../../../views/layout/header'); -%>
       <div data-controller="projects">
-  <%- include('components/title', {title: "Projects", sub: "This is where work happens"}) %>
+  <%- include('../../../../views/components/title', {title: "Projects", sub: "This is where work happens"}) %>
         <div class="mb-4 card">
           <div class="card-body">
             <h5 class="card-title">Add a new project</h5>
@@ -23,10 +23,10 @@
                 </tr>
               </thead>
               <tbody data-target="projects.list">
-                <%- include("projects/list-items", {projects: projects}); %>
+                <%- include("components/list-items", {projects: projects}); %>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-<%- include('layout/footer'); -%>
+<%- include('../../../../views/layout/footer'); -%>

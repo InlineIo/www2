@@ -1,4 +1,5 @@
-const fs = require("fs");
+const fs = require("fs"),
+  Mustache = require("mustache").Mustache;
 
 function createDir(output) {
   return (path) => {
@@ -14,9 +15,10 @@ function createFile(output) {
   };
 }
 
-function processTemplate(cont) {
+function processTemplate(name, options, cont) {
   return (f) => {
-    const content = "process temp";
+    console.log(options);
+    const content = Mustache.render(fs.readFileSync(f.tmp), {name, options});
     cont(f.path, content);
   };
 }
@@ -45,18 +47,18 @@ module.exports = {
           controllersDir,
           routesDir, viewsDir, componentsDir],
         files = [
-          { cmd: cmd, path: viewsList, tmp: `${tempDir}/viewsList.ejs`},
-          { cmd: cmd, path: viewsComponentsListItems, tmp: `` },
-          { cmd: cmd, path: routesIndex, tmp: `` },
-          { cmd: cmd, path: routesApi, tmp: `` },
-          { cmd: cmd, path: routesPages, tmp: `` },
-          { cmd: cmd, path: clientIndex, tmp: `` },
-          { cmd: cmd, path: controller, tmp: `` }
+          {path: viewsList, tmp: `${tempDir}/viewsList.ejs`},
+          {path: viewsComponentsListItems, tmp: `${tempDir}/listItems.ejs` },
+          {path: routesIndex, tmp: `${tempDir}/routesIndex.ejs` },
+          {path: routesApi, tmp: `${tempDir}/routesApi.ejs` },
+          {path: routesPages, tmp: `${tempDir}/routesPages.ejs` },
+          {path: clientIndex, tmp: `${tempDir}/clientIndex.js` },
+          {path: controller, tmp: `${tempDir}/controller.js` }
         ];
 
       output("Creating files");
       dirs.forEach(createDir(output));
-      files.forEach(processTemplate(createFile(output)));
+      files.forEach(processTemplate(name, cmd.options, createFile(output)));
       output("Finished");
     };
   }

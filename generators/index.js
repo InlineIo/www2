@@ -7,10 +7,7 @@ program.version("1.0.0")
   .usage();
 
 program
-  .command("module <name>")
-  .option("-s --singular", "Singular name for the resource")
-  .option("-t --title", "The title to show in the page")
-  .option("-d --description", "The description or tagline for the crud page")
+  .command("module <name> <singular> <title> <description>")
   .action(mod.cmd(output));
 
 program.parse(process.argv);

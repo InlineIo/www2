@@ -1,8 +1,8 @@
-<% {{name}}.forEach(function ({{options.singular.toLowerCase()}}) { %>
+<% {{name}}.forEach(function ({{singular.toLowerCase()}}) { %>
   <tr>
-    <td><%-{{options.singular.toLowerCase()}}.name%></td>
+    <td><%-{{singular.toLowerCase()}}.name%></td>
     <td>
-      <a href="<%-{{options.singular.toLowerCase()}}.id%>" data-id="<%-{{options.singular.toLowerCase()}}.id%>" data-action="{{name}}#remove">delete</a>
+      <a href="<%-{{singular.toLowerCase()}}.id%>" data-id="<%-{{singular.toLowerCase()}}.id%>" data-action="{{name}}#remove">delete</a>
     </td>
   </tr>
   <% }); %>

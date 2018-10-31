@@ -1,5 +1,5 @@
 const fs = require("fs"),
-  Mustache = require("mustache").Mustache;
+  Mustache = require("mustache");
 
 function createDir(output) {
   return (path) => {
@@ -15,17 +15,16 @@ function createFile(output) {
   };
 }
 
-function processTemplate(name, options, cont) {
+function processTemplate(payload, cont) {
   return (f) => {
-    console.log(options);
-    const content = Mustache.render(fs.readFileSync(f.tmp), {name, options});
+    const content = Mustache.render(fs.readFileSync(f.tmp).toString(), payload);
     cont(f.path, content);
   };
 }
 
 module.exports = {
   cmd(output) {
-    return (name, cmd) => {
+    return (name, singular, title, description, cmd) => {
       const baseDir = `${__dirname}/../modules/${name}`,
         clientDir = `${baseDir}/client`,
         serverDir = `${baseDir}/server`,
@@ -40,7 +39,7 @@ module.exports = {
       routesPages = `${routesDir}/pages.js`,
         clientIndex = `${clientDir}/index.js`,
         controller = `${controllersDir}/${name}_controller.js`,
-        tempDir = `${__dirname}/../templates/modules`;
+        tempDir = `${__dirname}/templates/modules`;
         dirs = [baseDir,
           clientDir,
           serverDir,
@@ -49,16 +48,16 @@ module.exports = {
         files = [
           {path: viewsList, tmp: `${tempDir}/viewsList.ejs`},
           {path: viewsComponentsListItems, tmp: `${tempDir}/listItems.ejs` },
-          {path: routesIndex, tmp: `${tempDir}/routesIndex.ejs` },
-          {path: routesApi, tmp: `${tempDir}/routesApi.ejs` },
-          {path: routesPages, tmp: `${tempDir}/routesPages.ejs` },
+          {path: routesIndex, tmp: `${tempDir}/routesIndex.js` },
+          {path: routesApi, tmp: `${tempDir}/routesApi.js` },
+          {path: routesPages, tmp: `${tempDir}/routesPages.js` },
           {path: clientIndex, tmp: `${tempDir}/clientIndex.js` },
           {path: controller, tmp: `${tempDir}/controller.js` }
         ];
 
       output("Creating files");
       dirs.forEach(createDir(output));
-      files.forEach(processTemplate(name, cmd.options, createFile(output)));
+      files.forEach(processTemplate({ name, singular, description, title }, createFile(output)));
       output("Finished");
     };
   }

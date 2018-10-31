@@ -1,12 +1,12 @@
 <%- include('../../../../views/layout/header'); -%>
 <div data-controller="{{name}}">
-  <%- include('../../../../views/components/title', {title: "{{options.title}}", sub: "{{options.description}}"}) %>
+  <%- include('../../../../views/components/title', {title: "{{title}}", sub: "{{description}}"}) %>
   <div class="mb-4 card">
     <div class="card-body">
-      <h5 class="card-title">Add a new {{options.singular.toLowerCase()}}</h5>
+      <h5 class="card-title">Add a new {{singular.toLowerCase()}}</h5>
       <form class="form-inline" data-action="{{name}}#save">
         <div class="form-group mb-2 mr-2">
-          <label for="newProjectName" class="mr-2">{{options.singular}} name</label>
+          <label for="newProjectName" class="mr-2">{{singular}} name</label>
           <input type="text" placeholder="New project" class="form-control" id="newProjectName" data-target="{{name}}.name">
         </div>
         <button type="submit" class="btn btn-primary mb-2">Create</button>

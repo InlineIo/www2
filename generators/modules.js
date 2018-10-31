@@ -8,9 +8,16 @@ function createDir(output) {
 }
 
 function createFile(output) {
-  return (path) => {
-    fs.writeFileSync(path);
+  return (path, content) => {
+    fs.writeFileSync(path, content);
     output(path);
+  };
+}
+
+function processTemplate(cont) {
+  return (f) => {
+    const content = "process temp";
+    cont(f.path, content);
   };
 }
 
@@ -31,18 +38,25 @@ module.exports = {
       routesPages = `${routesDir}/pages.js`,
         clientIndex = `${clientDir}/index.js`,
         controller = `${controllersDir}/${name}_controller.js`,
+        tempDir = `${__dirname}/../templates/modules`;
         dirs = [baseDir,
           clientDir,
           serverDir,
           controllersDir,
           routesDir, viewsDir, componentsDir],
-        files = [viewsList,
-          viewsComponentsListItems, routesIndex,
-          routesApi, routesPages, clientIndex, controller];
+        files = [
+          { cmd: cmd, path: viewsList, tmp: `${tempDir}/viewsList.ejs`},
+          { cmd: cmd, path: viewsComponentsListItems, tmp: `` },
+          { cmd: cmd, path: routesIndex, tmp: `` },
+          { cmd: cmd, path: routesApi, tmp: `` },
+          { cmd: cmd, path: routesPages, tmp: `` },
+          { cmd: cmd, path: clientIndex, tmp: `` },
+          { cmd: cmd, path: controller, tmp: `` }
+        ];
 
       output("Creating files");
       dirs.forEach(createDir(output));
-      files.forEach(createFile(output));
+      files.forEach(processTemplate(createFile(output)));
       output("Finished");
     };
   }

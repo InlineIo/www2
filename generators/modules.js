@@ -28,11 +28,21 @@ module.exports = {
         viewsComponentsListItems = `${componentsDir}/list-items`,
         routesIndex = `${routesDir}/index.js`,
         routesApi = `${routesDir}/api.js`
-        routesPages = `${routesDir}/pages.js`,
+      routesPages = `${routesDir}/pages.js`,
         clientIndex = `${clientDir}/index.js`,
-        controller = `${controllersDir}/${name}_controller.js`;
-      output("Creating files");
+        controller = `${controllersDir}/${name}_controller.js`,
+        dirs = [baseDir,
+          clientDir,
+          serverDir,
+          controllersDir,
+          routesDir, viewsDir, componentsDir],
+        files = [viewsList,
+          viewsComponentsListItems, routesIndex,
+          routesApi, routesPages, clientIndex, controller];
 
+      output("Creating files");
+      dirs.forEach(createDir(output));
+      files.forEach(createFile(output));
       output("Finished");
     };
   }

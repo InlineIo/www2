@@ -15,8 +15,8 @@ const port = process.env.PORT || 9000
 app.engine("ejs", cons.ejs);
 
 // set .html as the default extension
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
+app.set("view engine", "ejs");
+app.set("views", __dirname + "/views");
 app.set("db", db);
 
 app.use(express.static(publicPath))
@@ -24,6 +24,7 @@ app.use(webpackMiddleware(webpack(webpackConfig)))
 app.use(express.json());
 
 require("./modules/projects/server/routes").set(app);
+require("./modules/users/server/routes").set(app);
 web.set(app);
 
 app.listen(port, () => {

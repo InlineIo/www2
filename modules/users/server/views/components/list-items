@@ -1,0 +1,8 @@
+<% users.forEach(function () { %>
+  <tr>
+    <td><%-.name%></td>
+    <td>
+      <a href="<%-.id%>" data-id="<%-.id%>" data-action="users#remove">delete</a>
+    </td>
+  </tr>
+  <% }); %>

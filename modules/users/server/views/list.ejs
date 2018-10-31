@@ -1,0 +1,32 @@
+<%- include('../../../../views/layout/header'); -%>
+<div data-controller="users">
+  <%- include('../../../../views/components/title', {title: "Users", sub: "List of users in the system"}) %>
+  <div class="mb-4 card">
+    <div class="card-body">
+      <h5 class="card-title">Add a new </h5>
+      <form class="form-inline" data-action="users#save">
+        <div class="form-group mb-2 mr-2">
+          <label for="newProjectName" class="mr-2">User name</label>
+          <input type="text" placeholder="New project" class="form-control" id="newProjectName" data-target="users.name">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Create</button>
+      </form>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Users list</h5>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody data-target="users.list">
+          <%- include("components/list-items", ); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%- include('../../../../views/layout/footer'); -%>

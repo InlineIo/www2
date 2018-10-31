@@ -2,7 +2,7 @@ const fs = require("fs");
 
 function createDir(output) {
   return (path) => {
-    fs.mkdir(path);
+    fs.mkdirSync(path);
     output(path);
   };
 }
@@ -17,7 +17,7 @@ function createFile(output) {
 module.exports = {
   cmd(output) {
     return (name, cmd) => {
-      const baseDir = `${__dirname}/../../modules/${name}`,
+      const baseDir = `${__dirname}/../modules/${name}`,
         clientDir = `${baseDir}/client`,
         serverDir = `${baseDir}/server`,
         controllersDir = `${clientDir}/controllers`,

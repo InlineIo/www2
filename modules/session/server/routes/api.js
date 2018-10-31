@@ -1,21 +1,12 @@
 module.exports = (app) => {
   const db = app.get("db");
-  app.post("/api/signin", (req, res) => {
-    db.usignin.create(req.body)
-      .then(() => {
-        res.send({ status: "OK" });
+  app.post("/api/signup", (req, res) => {
+    db.organizations.create({name: req.body.organization})
+      .then((org) => {
+        const newUSer = req.body;
+        newUSer.orgId = org.id;
+        return db.users.create(newUser)
       })
-      .catch((error) => {
-        res.render("error", { error });
-      });
-  });
-
-  app.delete("/api/signin/:id", (req, res) => {
-    db.usignin.destroy({
-      where: {
-        id: req.params.id
-      }
-    })
       .then(() => {
         res.send({ status: "OK" });
       })

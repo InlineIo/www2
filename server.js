@@ -6,7 +6,6 @@ const webpack = require("webpack")
 const webpackMiddleware = require("webpack-dev-middleware")
 const webpackConfig = require("./webpack.config")
 const web = require("./web");
-const api = require("./api");
 
 const app = express()
 const publicPath = path.join(__dirname, "public")
@@ -24,8 +23,8 @@ app.use(express.static(publicPath))
 app.use(webpackMiddleware(webpack(webpackConfig)))
 app.use(express.json());
 
+require("./modules/projects/server/routes").set(app);
 web.set(app);
-api.set(app);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)

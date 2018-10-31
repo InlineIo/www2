@@ -1,6 +1,6 @@
 // src/controllers/hello_controller.js
 import { Controller } from "stimulus"
-import { getHtml, postData, deleteData} from "../services/ajax";
+import { getHtml, postData, deleteData} from "../../../../src/services/ajax";
 import { getDefaultEventNameForElement } from "@stimulus/core/dist/src/action";
 
 export default class extends Controller {

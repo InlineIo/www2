@@ -82,3 +82,17 @@
 
 .border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.parsley-errors-list.filled, .server-error.filled {
+  color: #fdfdfd;
+  background-color: rgb(214, 80, 80);
+  border-color: #2b0000;
+  border: 1px;
+  border-style: solid;
+  font-weight: bold;
+  padding: 4px;
+}
+
+input.parsley-error, select.parsley-error, textarea.parsley-error {
+  margin-bottom: 0 !important;
+}

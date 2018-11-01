@@ -46,11 +46,3 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.server-error {
-  color: #fdfdfd;
-  background-color: rgb(214, 80, 80);
-  border-color: #611010;
-  border: 1px;
-  border-style: solid;
-  font-weight: bold;
-}

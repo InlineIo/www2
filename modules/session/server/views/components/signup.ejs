@@ -3,9 +3,9 @@
 <label for="inputEmail" class="sr-only">Email address</label>
 <input data-target="session.email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus autocomplete="email">
 <label for="inputPassword" class="sr-only">Password</label>
-<input data-target="session.password"type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+<input data-target="session.password" type="password" id="inputPassword" class="form-control" placeholder="Password" minlength="7" required>
 <label for="inputConfirmPassword" class="sr-only">Confirm password</label>
-<input data-target="session.confirmPassword"type="password" id="inputConfirmPassword" class="form-control" placeholder="Confirm password" required>
+<input data-target="session.confirmPassword"type="password" id="inputConfirmPassword" class="form-control" minlength="7" data-parsley-equalto="#inputPassword" placeholder="Confirm password" required>
 <label for="organization" class="sr-only">Organization</label>
 <input data-target="session.organization"type="text" id="organization" class="form-control" placeholder="Organization name" required>
 <p class="server-error" data-target="session.serverError"></p>

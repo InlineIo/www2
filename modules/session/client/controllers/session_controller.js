@@ -50,6 +50,7 @@ export default class extends Controller {
   }
 
   pwdNoMatchErr() {
+    this.serverErrorTarget.className += " filled";
     this.serverErrorTarget.innerHTML = "The password and confirmation pwd don't match";
   }
 
@@ -58,7 +59,6 @@ export default class extends Controller {
   }
 
   signUp(event) {
-    event.preventDefault();
     if (!this.pwdMatch()) {
       this.pwdNoMatchErr();
       return;
@@ -78,5 +78,6 @@ export default class extends Controller {
       }
       return "";
     });
+    // event.preventDefault();
   }
 }

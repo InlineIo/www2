@@ -1,6 +1,6 @@
 module.exports = {
-  set(app) {
-    require("./api")(app);
-    require("./pages")(app);
+  set({api, web, db}) {
+    require("./api")(api, db);
+    require("./pages")(web, db);
   }
 };

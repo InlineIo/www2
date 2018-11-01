@@ -1,6 +1,5 @@
-module.exports = (app) => {
-  const db = app.get("db");
-  app.post("/api/signup", (req, res) => {
+module.exports = (api, db) => {
+  api.post("/signup", (req, res) => {
     const bcrypt = require("bcrypt");
     if (req.body.password !== req.body.confirmPassword) {
       res.status(409)

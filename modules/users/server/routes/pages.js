@@ -1,6 +1,5 @@
-module.exports = (app) => {
-  const db = app.get("db"),
-    payload = {
+module.exports = (app, db) => {
+  const payload = {
       jsApp: "../users.js"
     };
 

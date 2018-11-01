@@ -7,9 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     pwd: DataTypes.STRING,
     salt: DataTypes.STRING,
-    orgId: DataTypes.UUID
+    organizationsId: DataTypes.UUID,
+    role: DataTypes.STRING
   }, {});
-  users.associate = function(models) {
+  users.associate = function (models) {
+    users.belongsTo(models.organizations);
     // associations can be defined here
   };
   users.beforeCreate((user, _) => {

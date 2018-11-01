@@ -1,7 +1,7 @@
 module.exports = (app, db) => {
   const payload = {
-      jsApp: "../projects.js"
-    };
+    jsApp: "../projects.js"
+  };
 
   app.get("/pages/projects", (req, res) => {
     db.projects.findAll()
@@ -10,7 +10,7 @@ module.exports = (app, db) => {
         res.render("../modules/projects/server/views/list.ejs", payload);
       })
       .catch((error) => {
-        res.render("error", { error });
+        res.render("error", {error});
       });
   });
 
@@ -21,7 +21,7 @@ module.exports = (app, db) => {
         res.render("../modules/projects/server/views/components/list-items", payload);
       })
       .catch((error) => {
-        res.render("error", { error });
+        res.render("error", {error});
       });
   });
 };

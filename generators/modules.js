@@ -46,13 +46,13 @@ module.exports = {
           controllersDir,
           routesDir, viewsDir, componentsDir],
         files = [
-          {path: viewsList, tmp: `${tempDir}/viewsList.ejs`},
-          {path: viewsComponentsListItems, tmp: `${tempDir}/listItems.ejs` },
-          {path: routesIndex, tmp: `${tempDir}/routesIndex.js` },
-          {path: routesApi, tmp: `${tempDir}/routesApi.js` },
-          {path: routesPages, tmp: `${tempDir}/routesPages.js` },
-          {path: clientIndex, tmp: `${tempDir}/clientIndex.js` },
-          {path: controller, tmp: `${tempDir}/controller.js` }
+          {path: viewsList, tmp: `${tempDir}/viewsList.ejs.mustache`},
+          { path: viewsComponentsListItems, tmp: `${tempDir}/listItems.ejs.mustache` },
+          { path: routesIndex, tmp: `${tempDir}/routesIndex.js.mustache` },
+          { path: routesApi, tmp: `${tempDir}/routesApi.js.mustache` },
+          { path: routesPages, tmp: `${tempDir}/routesPages.js.mustache` },
+          { path: clientIndex, tmp: `${tempDir}/clientIndex.js.mustache` },
+          { path: controller, tmp: `${tempDir}/controller.js.mustache` }
         ];
 
       output("Creating files");

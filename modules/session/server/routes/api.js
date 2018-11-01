@@ -12,7 +12,7 @@ module.exports = (app) => {
     db.organizations.create({name: req.body.organization})
       .then((org) => {
         const newUser = req.body;
-        newUser.salt = bcrypt.genSaltSync(35);
+        newUser.salt = bcrypt.genSaltSync();
         newUser.orgId = org.id;
         newUser.pwd = bcrypt.hashSync(newUser.password, newUser.salt);
         return db.users.create(newUser)
@@ -21,7 +21,8 @@ module.exports = (app) => {
         res.send({ status: "OK" });
       })
       .catch((error) => {
-        res.render("error", { error });
+        console.log(error);
+        res.status(500).send(error);
       });
   });
 };

@@ -59,6 +59,7 @@ export default class extends Controller {
   }
 
   signUp(event) {
+    event.preventDefault();
     if (!this.pwdMatch()) {
       this.pwdNoMatchErr();
       return;
@@ -78,6 +79,5 @@ export default class extends Controller {
       }
       return "";
     });
-    // event.preventDefault();
   }
 }

@@ -8,22 +8,17 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/session.css">
-  <link rel="stylesheet" href="css/parsley.css">
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/parsley.min.js" async></script>
   <script src="<%-jsApp%>" async></script>
   <title>Inline.io</title>
 </head>
 
 <body>
   <div class="text-center w100" data-controller="session">
-    <form class="form-signin" onsubmit="event.preventDefault()" data-parsley-validate data-parsley-priority-enabled>
-      <img class="mb-4" src="/images/logo.png" alt="Inline.io" width="200px">
-      <div data-target="session.container">
-        <%-include("./components/signin.ejs")%>
-      </div>
-      <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
-    </form>
+    <img class="mb-4" src="/images/logo.png" alt="Inline.io" width="200px">
+    <div data-target="session.container">
+      <%-include("./components/signin.ejs")%>
+    </div>
+    <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
   </div>
 </body>
 </html>

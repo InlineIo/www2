@@ -25,7 +25,7 @@ module.exports = (api, db) => {
           .then((org) => {
             const newUser = req.body;
             newUser.salt = bcrypt.genSaltSync();
-            newUser.orgId = org.id;
+            newUser.organizationsId = org.id;
             newUser.pwd = bcrypt.hashSync(newUser.password, newUser.salt);
             return db.users.create(newUser)
           })

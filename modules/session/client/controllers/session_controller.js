@@ -84,7 +84,7 @@ export default class extends Controller {
       confirmPassword: this.confirmPasswordTarget.value
     })
     .then((result) => {
-      console.log("THEN", result);
+      location.assign("/pages/projects");
     })
     .catch((err) => {
       if (err.errorCode === "PWD_NO_MATCH") {
@@ -96,7 +96,6 @@ export default class extends Controller {
       if (err.errorCode === "USR_EXISTS") {
         this.userExist();
       }
-      return "";
     });
   }
 }

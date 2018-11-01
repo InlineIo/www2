@@ -6,10 +6,11 @@ web and api
 
 - [x] Handle duplicate organization error message
 - [x] Handle duplicate email error message
-- [ ] Do not create org if user already exists
+- [x] Do not create org if user already exists
 - [ ] Add role to user
 - [ ] Set user as owner when org is created
 - [ ] If sign up works redirect to setup page
+- [ ] Clean up sign up handler code, extract common patterns
 - [ ] Add api documentation for sign up
 - [ ] Extract error handling code into its own.
 - [ ] Enable sign in for users (token in session).

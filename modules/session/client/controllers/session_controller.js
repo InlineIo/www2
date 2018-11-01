@@ -49,9 +49,22 @@ export default class extends Controller {
       .catch(console.log);
   }
 
-  pwdNoMatchErr() {
+  showError() {
     this.serverErrorTarget.className += " filled";
+  }
+  pwdNoMatchErr() {
     this.serverErrorTarget.innerHTML = "The password and confirmation pwd don't match";
+    this.showError()
+  }
+
+  orgExists() {
+    this.serverErrorTarget.innerHTML = "The organization already exists.<br/>You should ask the organization owner to send you an invitation.";
+    this.showError()
+  }
+
+  userExist() {
+    this.serverErrorTarget.innerHTML = "There is already a user with that email in our system.<br/>If you forgot your password use the reset pwd option in the sign in page.";
+    this.showError()
   }
 
   pwdMatch() {
@@ -76,6 +89,12 @@ export default class extends Controller {
     .catch((err) => {
       if (err.errorCode === "PWD_NO_MATCH") {
         this.pwdNoMatchErr();
+      }
+      if (err.errorCode === "ORG_EXISTS") {
+        this.orgExists();
+      }
+      if (err.errorCode === "USR_EXISTS") {
+        this.userExist();
       }
       return "";
     });

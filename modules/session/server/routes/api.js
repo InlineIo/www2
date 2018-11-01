@@ -20,7 +20,22 @@ module.exports = (api, db) => {
         res.send({ status: "OK" });
       })
       .catch((error) => {
-        console.log(error);
+        if (error.name === "SequelizeUniqueConstraintError") {
+          if (error.parent && error.parent.constraint === "users_email_key") {
+            res.status(409).send({
+              errorCode: "USR_EXISTS",
+              errors: error.errors
+            });
+            return
+          }
+          if (error.parent && error.parent.constraint === "organizations_name_key") {
+            res.status(409).send({
+              errorCode: "ORG_EXISTS",
+              errors: error.errors
+            });
+            return;
+          }
+        }
         res.status(500).send(error);
       });
   });

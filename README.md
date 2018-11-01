@@ -4,12 +4,15 @@ web and api
 
 ### TODO
 
-- [ ] Handle duplicate organization error message
-- [ ] Handle duplicate email error message
+- [x] Handle duplicate organization error message
+- [x] Handle duplicate email error message
+- [ ] Do not create org if user already exists
 - [ ] Add role to user
 - [ ] Set user as owner when org is created
-- [ ] If signup works redirect to setup page
-- [ ] Enable singin for users (token in session).
+- [ ] If sign up works redirect to setup page
+- [ ] Add api documentation for sign up
+- [ ] Extract error handling code into its own.
+- [ ] Enable sign in for users (token in session).
 - [ ] Display sign in errors.
 - [ ] Enable remember me.
 - [ ] Enable reset pwd email.

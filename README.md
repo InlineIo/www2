@@ -13,6 +13,7 @@ web and api
 - [ ] Clean up sign up handler code, extract common patterns
 - [ ] Add api documentation for sign up
 - [ ] Extract error handling code into its own.
+- [ ] Stimulus custom base controller to avoid duplicated code
 - [ ] Enable sign in for users (token in session).
 - [ ] Display sign in errors.
 - [ ] Enable remember me.

@@ -1,6 +1,5 @@
-module.exports = (app) => {
-  const db = app.get("db");
-  app.post("/api/{{name}}", (req, res) => {
+module.exports = (api, db) => {
+  api.post("/api/{{name}}", (req, res) => {
     db.{{name}}.create(req.body)
       .then(() => {
         res.send({ status: "OK" });
@@ -10,7 +9,7 @@ module.exports = (app) => {
       });
   });
 
-  app.delete("/api/{{name}}/:id", (req, res) => {
+  api.delete("/api/{{name}}/:id", (req, res) => {
     db.{{name}}.destroy({
       where: {
         id: req.params.id

@@ -8,9 +8,8 @@ const express = require("express"),
     db,
     web,
     api
-  };
-
-const port = process.env.PORT || 9000
+  },
+  port = process.env.PORT || 9000;
 
 require("./modules/session/server/routes").set(options);
 require("./modules/projects/server/routes").set(options);
@@ -21,5 +20,5 @@ app.use("/", web);
 app.use("/api", api);
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
+  console.log(`Listening on port ${port}`);
 });

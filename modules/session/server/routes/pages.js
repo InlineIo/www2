@@ -1,7 +1,7 @@
-module.exports = (app, db) => {
+module.exports = (app) => {
   const payload = {
-      jsApp: "../session.js"
-    };
+    jsApp: "../session.js"
+  };
 
   app.get("/", (req, res) => {
     res.render("../modules/session/server/views/index.ejs", payload);

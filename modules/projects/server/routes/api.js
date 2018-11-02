@@ -5,7 +5,7 @@ module.exports = (api, db) => {
         res.send({ status: "OK" });
       })
       .catch((error) => {
-        res.render("error", { error });
+        res.status(500).send(error);
       });
   });
 
@@ -19,7 +19,7 @@ module.exports = (api, db) => {
         res.send({ status: "OK" });
       })
       .catch((error) => {
-        res.render("error", { error });
+        res.status(500).send(error);
       });
   });
 };

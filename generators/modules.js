@@ -30,29 +30,35 @@ module.exports = {
         serverDir = `${baseDir}/server`,
         controllersDir = `${clientDir}/controllers`,
         routesDir = `${serverDir}/routes`,
+        servicesDir = `${serverDir}/services`,
         viewsDir = `${serverDir}/views`,
         componentsDir = `${viewsDir}/components`,
         viewsList = `${viewsDir}/list.ejs`,
         viewsComponentsListItems = `${componentsDir}/list-items.ejs`,
         routesIndex = `${routesDir}/index.js`,
-        routesApi = `${routesDir}/api.js`
-      routesPages = `${routesDir}/pages.js`,
+        routesApi = `${routesDir}/api.js`,
+        routesPages = `${routesDir}/pages.js`,
         clientIndex = `${clientDir}/index.js`,
+        services = `${servicesDir}/services.js`,
         controller = `${controllersDir}/${name}_controller.js`,
-        tempDir = `${__dirname}/templates/modules`;
+        tempDir = `${__dirname}/templates/modules`,
         dirs = [baseDir,
           clientDir,
           serverDir,
           controllersDir,
-          routesDir, viewsDir, componentsDir],
+          servicesDir,
+          routesDir,
+          viewsDir,
+          componentsDir],
         files = [
           {path: viewsList, tmp: `${tempDir}/viewsList.ejs.mustache`},
-          { path: viewsComponentsListItems, tmp: `${tempDir}/listItems.ejs.mustache` },
-          { path: routesIndex, tmp: `${tempDir}/routesIndex.js.mustache` },
-          { path: routesApi, tmp: `${tempDir}/routesApi.js.mustache` },
-          { path: routesPages, tmp: `${tempDir}/routesPages.js.mustache` },
-          { path: clientIndex, tmp: `${tempDir}/clientIndex.js.mustache` },
-          { path: controller, tmp: `${tempDir}/controller.js.mustache` }
+          {path: viewsComponentsListItems, tmp: `${tempDir}/listItems.ejs.mustache` },
+          {path: routesIndex, tmp: `${tempDir}/routesIndex.js.mustache` },
+          {path: routesApi, tmp: `${tempDir}/routesApi.js.mustache` },
+          {path: routesPages, tmp: `${tempDir}/routesPages.js.mustache` },
+          {path: clientIndex, tmp: `${tempDir}/clientIndex.js.mustache` },
+          {path: controller, tmp: `${tempDir}/controller.js.mustache` },
+          {path: services, tmp: `${tempDir}/servicesIndex.js.mustache` }
         ];
 
       output("Creating files");

@@ -121,15 +121,15 @@ export default class extends Controller {
         this.pwdNoMatchErr();
         return;
       }
-      if (err.errorCode === "ORG_EXISTS") {
+      if (err.errorCode === "ORG_EXIST") {
         this.orgExists();
         return;
       }
-      if (err.errorCode === "USR_EXISTS") {
+      if (err.errorCode === "USR_EXIST") {
         this.userExist();
         return;
       }
-      this.genError();
+      this.genericError();
     });
   }
 }

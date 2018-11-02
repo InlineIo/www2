@@ -1,12 +1,14 @@
+const
+  {
+    apiErrors
+  } = require("../../../../responses");
 module.exports = (api, db) => {
   api.post("/users", (req, res) => {
     db.users.create(req.body)
       .then(() => {
         res.send({ status: "OK" });
       })
-      .catch((error) => {
-        res.render("error", { error });
-      });
+      .catch(apiErrors(req, res, 409));
   });
 
   api.delete("/users/:id", (req, res) => {
@@ -18,8 +20,6 @@ module.exports = (api, db) => {
       .then(() => {
         res.send({ status: "OK" });
       })
-      .catch((error) => {
-        res.render("error", { error });
-      });
+      .catch(apiErrors(req, res, 409));
   });
 };

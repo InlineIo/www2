@@ -48,5 +48,13 @@ module.exports = {
     req.session.destroy(() => {
       res.redirect("/");
     });
+  },
+  startSessionApi(req, res) {
+    return (user) => {
+      req.session.user = user;
+      res.send({
+        status: "OK"
+      });
+    };
   }
 };

@@ -24,7 +24,11 @@ web and api
 - [ ] Create workflows (status)
 - [ ] Create a default workflow (non modifiable)
 - [ ] Create swim-lanes
-- [ ] Create milestones
+- [ ] Create milestones/releases
+- [ ] Create tags
+- [ ] Create cases
+- [ ] Create main views
+- [ ] On sign in redirect to main views
 
 Betterez -> Org
 Swim-lane -> can associate to a repository

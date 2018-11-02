@@ -3,6 +3,10 @@ const
     apiErrors
   } = require("../../../../responses");
 module.exports = (api, db) => {
+  api.get("/users", (req, res) => {
+    res.send(["users"]);
+  });
+
   api.post("/users", (req, res) => {
     db.users.create(req.body)
       .then(() => {

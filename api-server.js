@@ -7,13 +7,10 @@ const express = require("express"),
 
 createMiddleware(swaggerFile, api, (_, middleware) => {
   api.use(
-    middleware.metadata(),
-    middleware.files(),
-    middleware.parseRequest(),
-    middleware.validateRequest(),
-    middleware.mock()
+    middleware.files()
   );
 });
+
 api.use(express.json());
 session.addSession(api);
 

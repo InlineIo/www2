@@ -10,6 +10,13 @@ produces:
   - application/json
 
 definitions:
+  project:
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        description: "The name of the project"
   pet:
     required:
       - name
@@ -65,6 +72,12 @@ definitions:
         type: integer
         minimum: 10000
         maximum: 99999
+
+  project-filters:
+    - name: name
+      in: query
+      type: string
+      required: true
 
   pet-filters:
     - name: tags
@@ -138,6 +151,20 @@ parameters:
     type: string
 
 paths:
+  /projects:
+    get:
+      description: Return all projects for the logged in user organization
+      operationId: findProjects
+      parameters:
+        $ref: "#/definitions/project-filters"
+      responses:
+        default:
+          description: Return all projects
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/project"
+
   /pets:
     get:
       description: Returns all pets, optionally filtered by one or more criteria

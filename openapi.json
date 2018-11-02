@@ -1,0 +1,102 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "version": "1.0.0",
+    "title": "Inline Api",
+    "description": "The API for Inline.io"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9000/api/v1",
+      "description": "Localhost"
+    },
+    {
+      "url": "https://sandbox.inline.io/api/v1",
+      "description": "Sandbox server"
+    },
+    {
+      "url": "https://inline.io/api/v1",
+      "description": "Production server"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "project": {
+        "type": "object",
+        "description": "A project",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the pet"
+          }
+        }
+      },
+      "GeneralError": {
+        "type": "object",
+        "description": "A generic error",
+        "properties": {
+          "errorCode": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "skipParam": {
+        "name": "skip",
+        "in": "query",
+        "description": "number of items to skip",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "limitParam": {
+        "name": "limit",
+        "in": "query",
+        "description": "max records to return",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key_header": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      },
+      "api_key_query": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "query"
+      }
+    }
+  },
+  "paths": {
+    "/projects": {
+      "post": {
+        "description": "Return all projects for the logged in user organization",
+        "operationId": "findProjects",
+        "responses": {
+          "200": {
+            "description": "Return all projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/project"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -13,13 +13,12 @@ web and api
 - [x] If sign up works redirect to setup page
 - [x] Sign out (close session)
 - [ ] Enable sign in for users (token in session)
+- [ ] Display sign in errors.
 - [ ] Clean up sign up handler code, extract common patterns
 - [ ] Add api documentation for sign up
 - [ ] Extract error handling code into its own.
 - [ ] Stimulus custom base controller to avoid duplicated code
-- [ ] Display sign in errors.
-- [ ] Enable remember me.
-- [ ] Enable reset pwd email.
+- [ ] Update templates with changes above
 - [ ] Create projects and assign to organization
 - [ ] Create workflows (status)
 - [ ] Create a default workflow (non modifiable)
@@ -29,6 +28,8 @@ web and api
 - [ ] Create cases
 - [ ] Create main views
 - [ ] On sign in redirect to main views
+- [ ] Enable remember me.
+- [ ] Enable reset pwd email.
 
 Betterez -> Org
 Swim-lane -> can associate to a repository

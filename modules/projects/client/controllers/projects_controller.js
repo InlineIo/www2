@@ -1,9 +1,9 @@
 // src/controllers/hello_controller.js
-import { Controller } from "stimulus"
+import InlineController from "../../../../src/bases/inline_controller";
 import { getHtml, postData, deleteData} from "../../../../src/services/ajax";
 import { getDefaultEventNameForElement } from "@stimulus/core/dist/src/action";
 
-export default class extends Controller {
+export default class extends InlineController {
   static targets = ["name", "list"]
   refresh() {
     getHtml("/content/projects")

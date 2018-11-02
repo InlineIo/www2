@@ -1,37 +1,15 @@
-import { Controller } from "stimulus"
+import InlineController from "../../../../src/bases/inline_controller";
 import { getHtml, postData } from "../../../../src/services/ajax";
 import { getDefaultEventNameForElement } from "@stimulus/core/dist/src/action";
 
-export default class extends Controller {
+export default class extends InlineController {
   static targets = ["email",
     "organization",
     "password",
     "confirmPassword",
     "container",
-    "serverError",
     "signInEmail",
     "signInPassword"]
-
-  navigate() {
-    if (this.hash !== location.hash) {
-      const fn = location.hash.replace("#/", "");
-      if (typeof this[fn] === "function") {
-        this[fn]();
-      }
-    }
-  }
-
-  updateHash() {
-    this.hash = location.hash;
-  }
-
-  connect() {
-    this.hash = "";
-    this.navigate();
-    window.onhashchange = () => {
-      this.navigate();
-    };
-  }
 
   startSignIn() {
     getHtml("/content/session/signin")
@@ -51,32 +29,20 @@ export default class extends Controller {
       .catch(console.log);
   }
 
-  showError() {
-    this.serverErrorTarget.className += " filled";
-  }
   pwdNoMatchErr() {
-    this.serverErrorTarget.innerHTML = "The password and confirmation pwd don't match";
-    this.showError()
+    this.showError("The password and confirmation pwd don't match");
   }
 
   orgExists() {
-    this.serverErrorTarget.innerHTML = "The organization already exists.<br/>You should ask the organization owner to send you an invitation.";
-    this.showError()
+    this.showError("The organization already exists.<br/>You should ask the organization owner to send you an invitation.");
   }
 
   userExist() {
-    this.serverErrorTarget.innerHTML = "There is already a user with that email in our system.<br/>If you forgot your password use the reset pwd option in the sign in page.";
-    this.showError()
+    this.showError("There is already a user with that email in our system.<br/>If you forgot your password use the reset pwd option in the sign in page.");
   }
 
   invalidLogin() {
-    this.serverErrorTarget.innerHTML = "The email is not in our database or the password doesn't match.";
-    this.showError()
-  }
-
-  genericError() {
-    this.serverErrorTarget.innerHTML = "There was an error calling our servers. Pleas try again later";
-    this.showError()
+    this.showError("The email is not in our database or the password doesn't match.");
   }
 
   pwdMatch() {

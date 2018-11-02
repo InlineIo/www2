@@ -1,35 +1,10 @@
-// src/controllers/hello_controller.js
-import { Controller } from "stimulus"
+// src/controllers/{{name}}_controller.js
+import InlineController from "../../../../src/bases/inline_controller";
 import { getHtml, postData, deleteData } from "../../../../src/services/ajax";
 import { getDefaultEventNameForElement } from "@stimulus/core/dist/src/action";
 
-export default class extends Controller {
+export default class extends InlineController {
   static targets = ["name", "list"]
-
-  // Used to navigate if the hash changes
-  // the hash should has the same name of the event
-  // hash should be updated on methods that want to preserve state in the url
-  // calling this.updateHash()
-  navigate() {
-    if (this.hash !== location.hash) {
-      const fn = location.hash.replace("#/", "");
-      if (typeof this[fn] === "function") {
-        this[fn]();
-      }
-    }
-  }
-
-  updateHash() {
-    this.hash = location.hash;
-  }
-
-  connect() {
-    this.hash = "";
-    this.navigate();
-    window.onhashchange = () => {
-      this.navigate();
-    };
-  }
 
   refresh() {
     getHtml("/content/{{name}}")

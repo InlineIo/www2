@@ -16,9 +16,9 @@ web and api
 - [x] Display sign in errors.
 - [x] Clean up sign up handler code, extract common patterns
 - [x] Extract error handling code into its own.
-- [ ] Stimulus custom base controller to avoid duplicated code
-- [ ] Update templates with changes above
-- [ ] Add api documentation for sign up
+- [x] Stimulus custom base controller to avoid duplicated code
+- [x] Update templates with changes above
+- [ ] Add api documentation
 - [ ] Create projects and assign to organization
 - [ ] Create workflows (status)
 - [ ] Create a default workflow (non modifiable)

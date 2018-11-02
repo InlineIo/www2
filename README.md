@@ -7,22 +7,23 @@ web and api
 - [x] Handle duplicate organization error message
 - [x] Handle duplicate email error message
 - [x] Do not create org if user already exists
-- [ ] Add role to user
-- [ ] Set user as owner when org is created
-- [ ] If sign up works add user to session
+- [x] Add role to user
+- [x] Set user as owner when org is created
+- [x] If sign up works add user to session
 - [X] If sign up works redirect to setup page
+- [ ] Enable sign in for users (token in session)
 - [ ] Clean up sign up handler code, extract common patterns
 - [ ] Add api documentation for sign up
 - [ ] Extract error handling code into its own.
 - [ ] Stimulus custom base controller to avoid duplicated code
-- [ ] Enable sign in for users (token in session).
 - [ ] Display sign in errors.
 - [ ] Enable remember me.
 - [ ] Enable reset pwd email.
+- [ ] Create projects
 - [ ] Create workflows (status)
+- [ ] Create a default workflow (non modifiable)
 - [ ] Create swim-lanes
 - [ ] Create milestones
-- [ ] Create projects
 
 Betterez -> Org
 Swim-lane -> can associate to a repository

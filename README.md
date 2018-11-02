@@ -14,11 +14,11 @@ web and api
 - [x] Sign out (close session)
 - [x] Enable sign in for users (token in session)
 - [x] Display sign in errors.
-- [ ] Clean up sign up handler code, extract common patterns
-- [ ] Add api documentation for sign up
-- [ ] Extract error handling code into its own.
+- [x] Clean up sign up handler code, extract common patterns
+- [x] Extract error handling code into its own.
 - [ ] Stimulus custom base controller to avoid duplicated code
 - [ ] Update templates with changes above
+- [ ] Add api documentation for sign up
 - [ ] Create projects and assign to organization
 - [ ] Create workflows (status)
 - [ ] Create a default workflow (non modifiable)

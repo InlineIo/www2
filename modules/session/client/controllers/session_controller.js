@@ -8,7 +8,9 @@ export default class extends Controller {
     "password",
     "confirmPassword",
     "container",
-    "serverError"]
+    "serverError",
+    "signInEmail",
+    "signInPassword"]
 
   navigate() {
     if (this.hash !== location.hash) {
@@ -67,8 +69,36 @@ export default class extends Controller {
     this.showError()
   }
 
+  invalidLogin() {
+    this.serverErrorTarget.innerHTML = "The email is not in our database or the password doesn't match.";
+    this.showError()
+  }
+
+  genericError() {
+    this.serverErrorTarget.innerHTML = "There was an error calling our servers. Pleas try again later";
+    this.showError()
+  }
+
   pwdMatch() {
     return this.passwordTarget.value === this.confirmPasswordTarget.value
+  }
+
+  signIn() {
+    event.preventDefault();
+    postData("/api/signin", {
+      email: this.signInEmailTarget.value,
+      password: this.signInPasswordTarget.value,
+    })
+    .then(() => {
+      location.assign("/pages/projects");
+    })
+    .catch((err) => {
+      if (err.errorCode === "NOT_FOUND") {
+        this.invalidLogin();
+        return;
+      }
+      this.genericError();
+    });
   }
 
   signUp(event) {
@@ -83,19 +113,23 @@ export default class extends Controller {
       password: this.passwordTarget.value,
       confirmPassword: this.confirmPasswordTarget.value
     })
-    .then((result) => {
+    .then(() => {
       location.assign("/pages/projects");
     })
     .catch((err) => {
       if (err.errorCode === "PWD_NO_MATCH") {
         this.pwdNoMatchErr();
+        return;
       }
       if (err.errorCode === "ORG_EXISTS") {
         this.orgExists();
+        return;
       }
       if (err.errorCode === "USR_EXISTS") {
         this.userExist();
+        return;
       }
+      this.genError();
     });
   }
 }

@@ -1,7 +1,37 @@
-module.exports = (api, db) => {
-  api.post("/signup", (req, res) => {
-    const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
+module.exports = (api, db) => {
+  api.post("/signin", (req, res) => {
+    db.users.findOne({
+      where: {
+        email: req.body.email
+      },
+      attributes: ["id", "pwd", "salt"]
+    })
+      .then((user) => {
+        if (!user) {
+          res.status(404).send({
+            errorCode: "NOT_FOUND"
+          });
+          return;
+        }
+        if (user.pwd !== bcrypt.hashSync(req.body.password, user.salt)) {
+          res.status(404).send({
+            errorCode: "NOT_FOUND"
+          });
+          return;
+        }
+        req.session.user = user;
+        res.send({
+          status: "OK"
+        });
+      })
+      .catch((error) => {
+        res.status(500).send(error);
+      });
+  });
+
+  api.post("/signup", (req, res) => {
     if (req.body.password !== req.body.confirmPassword) {
       res.status(409)
         .send({

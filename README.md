@@ -12,8 +12,8 @@ web and api
 - [x] If sign up works add user to session
 - [x] If sign up works redirect to setup page
 - [x] Sign out (close session)
-- [ ] Enable sign in for users (token in session)
-- [ ] Display sign in errors.
+- [x] Enable sign in for users (token in session)
+- [x] Display sign in errors.
 - [ ] Clean up sign up handler code, extract common patterns
 - [ ] Add api documentation for sign up
 - [ ] Extract error handling code into its own.

@@ -11,7 +11,7 @@ web and api
 - [x] Set user as owner when org is created
 - [x] If sign up works add user to session
 - [X] If sign up works redirect to setup page
-- [ ] Sign out (close session)
+- [x] Sign out (close session)
 - [ ] Enable sign in for users (token in session)
 - [ ] Clean up sign up handler code, extract common patterns
 - [ ] Add api documentation for sign up

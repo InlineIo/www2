@@ -1,13 +1,15 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const uuid = require("uuid");
-  const projects = sequelize.define('projects', {
-    name: DataTypes.STRING
-  }, {});
-  projects.associate = function(models) {
-    // associations can be defined here
-  };
-  projects.beforeCreate((project, _) => {
+  const uuid = require("uuid"),
+    projects = sequelize.define("projects", {
+      name: DataTypes.STRING,
+      organizationsId: DataTypes.UUID
+    }, {});
+
+  // projects.associate = (models) => {
+  //   // associations can be defined here
+  // };
+  projects.beforeCreate((project) => {
     project.id = uuid();
     return project;
   });

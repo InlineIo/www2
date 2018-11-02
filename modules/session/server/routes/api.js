@@ -27,11 +27,13 @@ module.exports = (api, db) => {
           .then((org) => {
             const newUser = req.body;
             newUser.salt = bcrypt.genSaltSync();
-            newUser.orgId = org.id;
+            newUser.organizationsId = org.id;
+            newUser.role = "owner";
             newUser.pwd = bcrypt.hashSync(newUser.password, newUser.salt);
             return db.users.create(newUser);
           })
-          .then(() => {
+          .then((user) => {
+            req.session.user = user;
             res.send({status: "OK"});
           })
           .catch((error) => {

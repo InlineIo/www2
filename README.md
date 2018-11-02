@@ -11,6 +11,7 @@ web and api
 - [x] Set user as owner when org is created
 - [x] If sign up works add user to session
 - [X] If sign up works redirect to setup page
+- [ ] Sign out (close session)
 - [ ] Enable sign in for users (token in session)
 - [ ] Clean up sign up handler code, extract common patterns
 - [ ] Add api documentation for sign up
@@ -19,7 +20,7 @@ web and api
 - [ ] Display sign in errors.
 - [ ] Enable remember me.
 - [ ] Enable reset pwd email.
-- [ ] Create projects
+- [ ] Create projects and assign to organization
 - [ ] Create workflows (status)
 - [ ] Create a default workflow (non modifiable)
 - [ ] Create swim-lanes

@@ -43,5 +43,10 @@ module.exports = {
       }
       res.redirect("/pages/unauthorized");
     };
+  },
+  closeSessionWeb(req, res) {
+    req.session.destroy(() => {
+      res.redirect("/");
+    });
   }
 };

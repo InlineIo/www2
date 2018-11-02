@@ -1,4 +1,7 @@
-const { authorizeWeb } = require("../../../../session-store");
+const {
+  authorizeWeb,
+  closeSessionWeb
+} = require("../../../../session-store");
 
 module.exports = (app) => {
   const payload = {
@@ -9,11 +12,7 @@ module.exports = (app) => {
     res.render("../modules/session/server/views/index.ejs", payload);
   });
 
-  app.get("/signout", authorizeWeb([]), (req, res) => {
-    req.session.destroy(() => {
-      res.redirect("/");
-    });
-  });
+  app.get("/signout", authorizeWeb([]), closeSessionWeb);
 
   app.get("/content/session/signin", (req, res) => {
     res.render("../modules/session/server/views/components/signin.ejs", payload);

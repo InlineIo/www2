@@ -21,41 +21,153 @@
   ],
   "components": {
     "schemas": {
-      "Project": {
+      "ProjectData": {
         "type": "object",
-        "description": "A project",
+        "description": "The infomation to create or edit a project",
         "required": [
           "name"
         ],
         "properties": {
           "name": {
             "type": "string",
-            "description": "The name of the project"
+            "description": "The name of the project",
+            "example": "My first project"
           },
           "description": {
             "type": "string",
-            "description": "A short description of the project"
+            "description": "A short description of the project",
+            "example": "This is my first project"
+          }
+        }
+      },
+      "Project": {
+        "type": "object",
+        "description": "A project",
+        "required": [
+          "id",
+          "name",
+          "organizationsId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "1234-79090"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the project",
+            "example": "My first project"
+          },
+          "description": {
+            "type": "string",
+            "description": "A short description of the project",
+            "example": "This is my first project"
           },
           "organizationsId": {
             "type": "string",
-            "description": "The organization the project belongs to"
+            "format": "uuid",
+            "description": "The organization the project belongs to",
+            "example": "1111-111-11-1111"
           },
           "createdAt": {
             "type": "string",
+            "format": "date-time",
             "description": "When the project was created"
           },
           "updatedAt": {
             "type": "string",
+            "format": "date-time",
             "description": "Last udpate date and time"
           }
         }
       },
-      "GeneralError": {
+      "Error": {
         "type": "object",
-        "description": "A generic error",
+        "description": "A basic error",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseError": {
+        "type": "object",
+        "description": "A response error",
+        "required": [
+          "errorCode"
+        ],
         "properties": {
           "errorCode": {
             "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "No content"
+      },
+      "400": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResponseError"
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized"
+      },
+      "402": {
+        "description": "Payment required"
+      },
+      "403": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResponseError"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Entity not found"
+      },
+      "409": {
+        "description": "Conflict",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResponseError"
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "General server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ResponseError"
+            }
           }
         }
       }
@@ -130,6 +242,132 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "post": {
+        "description": "Creates a new project in the organization of the logged in user",
+        "operationId": "createProject",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return the created project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/projects/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "ID of the project to delete",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "put": {
+        "description": "Update the project name and description",
+        "operationId": "updateProject",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return the created project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "description": "Remove the project with the matching id",
+        "operationId": "deleteProject",
+        "responses": {
+          "204": {
+            "$ref": "#/components/responses/204"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
           }
         }
       }

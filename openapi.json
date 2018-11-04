@@ -252,7 +252,15 @@
           "500": {
             "$ref": "#/components/responses/500"
           }
-        }
+        },
+        "security": [
+          {
+            "api_key_header": []
+          },
+          {
+            "api_key_query": []
+          }
+        ]
       },
       "post": {
         "description": "Creates a new project in the organization of the logged in user",
@@ -292,7 +300,12 @@
           "500": {
             "$ref": "#/components/responses/500"
           }
-        }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
       }
     },
     "/projects/{id}": {
@@ -345,7 +358,12 @@
           "500": {
             "$ref": "#/components/responses/500"
           }
-        }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
       },
       "delete": {
         "description": "Remove the project with the matching id",
@@ -369,7 +387,12 @@
           "500": {
             "$ref": "#/components/responses/500"
           }
-        }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
       }
     }
   }

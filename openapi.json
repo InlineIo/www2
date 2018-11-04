@@ -21,13 +21,32 @@
   ],
   "components": {
     "schemas": {
-      "project": {
+      "Project": {
         "type": "object",
         "description": "A project",
+        "required": [
+          "name"
+        ],
         "properties": {
           "name": {
             "type": "string",
-            "description": "The name of the pet"
+            "description": "The name of the project"
+          },
+          "description": {
+            "type": "string",
+            "description": "A short description of the project"
+          },
+          "organizationsId": {
+            "type": "string",
+            "description": "The organization the project belongs to"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "When the project was created"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last udpate date and time"
           }
         }
       },
@@ -46,7 +65,7 @@
         "name": "skip",
         "in": "query",
         "description": "number of items to skip",
-        "required": true,
+        "required": false,
         "schema": {
           "type": "integer",
           "format": "int32"
@@ -56,7 +75,7 @@
         "name": "limit",
         "in": "query",
         "description": "max records to return",
-        "required": true,
+        "required": false,
         "schema": {
           "type": "integer",
           "format": "int32"
@@ -64,6 +83,15 @@
       }
     },
     "securitySchemes": {
+      "basic": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
       "api_key_header": {
         "type": "apiKey",
         "name": "x-api-key",
@@ -78,9 +106,17 @@
   },
   "paths": {
     "/projects": {
-      "post": {
+      "get": {
         "description": "Return all projects for the logged in user organization",
         "operationId": "findProjects",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/skipParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Return all projects",
@@ -89,7 +125,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/project"
+                    "$ref": "#/components/schemas/Project"
                   }
                 }
               }
